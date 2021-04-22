@@ -34,15 +34,15 @@ public final class JasperIndex
   }
 
   /** Add a new point to index. */
-  public void add(String path, BComponent point)
+  public void add(JasperPoint p)
   {
-    map.put(path, point);
+    map.put(p.id, p);
   }
 
-  /** Get the point for given path or null if not found. */
-  public BComponent get(String path)
+  /** Get the point for given id or null if not found. */
+  public JasperPoint get(String id)
   {
-    return (BComponent)map.get(path);
+    return (JasperPoint)map.get(id);
   }
 
   private HashMap map = new HashMap();

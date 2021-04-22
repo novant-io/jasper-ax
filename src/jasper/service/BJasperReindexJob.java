@@ -10,6 +10,7 @@ package jasper.service;
 
 import javax.baja.job.*;
 import javax.baja.control.*;
+import javax.baja.naming.*;
 import javax.baja.sys.*;
 
 /**
@@ -67,8 +68,13 @@ public final class BJasperReindexJob extends BSimpleJob
       BComponent c = comps[i];
       if (c instanceof BNumericPoint || c instanceof BBooleanPoint)
       {
+        String id   = c.getHandleOrd().toString();
+        String name = c.getName();
         String path = c.getSlotPath().toString();
-        index.add(path, c);
+        String unit = null;
+
+        JasperPoint point = new JasperPoint(id, name, path, unit);
+        index.add(point);
       }
     }
 
