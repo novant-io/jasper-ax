@@ -1,0 +1,17 @@
+<!--
+  Copyright (c) 2021, Novant LLC
+  Licensed under the MIT License
+
+  History:
+    21 Apr 2021  Andy Frank  Creation
+-->
+
+<types>
+
+  <!-- jasper.service -->
+  <type name="JasperService" class="jasper.service.BJasperService" />
+
+  <!-- jasper.servlet -->
+  <type name="JasperServlet" class="jasper.servlet.BJasperServlet" />
+
+</types>

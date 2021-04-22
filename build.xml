@@ -1,0 +1,27 @@
+<!--
+  Copyright (c) 2021, Novant LLC
+  Licensed under the MIT License
+
+  History:
+    21 Apr 2021  Andy Frank  Creation
+-->
+
+<module
+    name            = "jasper"
+    bajaVersion     = "0"
+    preferredSymbol = "jp"
+    description     = "Jasper"
+    vendor          = "Novant"
+    vendorVersion   = "0.1"
+    edition         = "j2me"
+>
+
+  <!-- Dependencies -->
+  <dependency name="baja" vendor="Tridium" vendorVersion="3.8" />
+  <dependency name="web"  vendor="Tridium" vendorVersion="3.8" />
+
+  <!-- Packages -->
+  <package name="jasper.service" />
+  <package name="jasper.servlet" />
+
+</module>
