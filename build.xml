@@ -17,8 +17,9 @@
 >
 
   <!-- Dependencies -->
-  <dependency name="baja" vendor="Tridium" vendorVersion="3.8" />
-  <dependency name="web"  vendor="Tridium" vendorVersion="3.8" />
+  <dependency name="baja"    vendor="Tridium" vendorVersion="3.8" />
+  <dependency name="control" vendor="Tridium" vendorVersion="3.8" />
+  <dependency name="web"     vendor="Tridium" vendorVersion="3.8" />
 
   <!-- Packages -->
   <package name="jasper.service" />

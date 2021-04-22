@@ -25,6 +25,7 @@ public final class BJasperServlet extends BWebServlet
     properties
     {
     }
+
     actions
     {
     }

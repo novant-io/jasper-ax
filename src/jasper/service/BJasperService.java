@@ -3,11 +3,13 @@
 // Licensed under the MIT License
 //
 // History:
-//     Andy Frank  Creation
+//   21 Apr 2021  Andy Frank  Creation
 //
 
 package jasper.service;
 
+
+import javax.baja.log.*;
 import javax.baja.sys.*;
 import jasper.servlet.*;
 
@@ -104,6 +106,16 @@ public final class BJasperService extends BAbstractService
 
   public void doRebuildIndex()
   {
-    System.out.println("----> JASPER_REBUILD_INDEX");
+    BJasperReindexJob job = new BJasperReindexJob(index);
+    try { job.run(null); }
+    catch (Exception e) { e.printStackTrace(); }
   }
+
+////////////////////////////////////////////////////////////////
+// Attributes
+////////////////////////////////////////////////////////////////
+
+  static final Log LOG = Log.getLog("jasper");
+
+  private JasperIndex index = new JasperIndex();
 }
