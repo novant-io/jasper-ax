@@ -24,11 +24,16 @@ public final class BJasperService extends BAbstractService
       servlet: BJasperServlet
         default{[ new BJasperServlet() ]}
     }
+
+    actions
+    {
+      rebuildIndex()
+    }
   }
   -*/
 /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
-/*@ $jasper.service.BJasperService(174022339)1.0$ @*/
-/* Generated Wed Apr 21 15:57:23 EDT 2021 by Slot-o-Matic 2000 (c) Tridium, Inc. 2000 */
+/*@ $jasper.service.BJasperService(4038923251)1.0$ @*/
+/* Generated Wed Apr 21 21:32:17 EDT 2021 by Slot-o-Matic 2000 (c) Tridium, Inc. 2000 */
 
 ////////////////////////////////////////////////////////////////
 // Property "servlet"
@@ -52,6 +57,22 @@ public final class BJasperService extends BAbstractService
    * @see jasper.service.BJasperService#servlet
    */
   public void setServlet(BJasperServlet v) { set(servlet,v,null); }
+
+////////////////////////////////////////////////////////////////
+// Action "rebuildIndex"
+////////////////////////////////////////////////////////////////
+
+  /**
+   * Slot for the <code>rebuildIndex</code> action.
+   * @see jasper.service.BJasperService#rebuildIndex()
+   */
+  public static final Action rebuildIndex = newAction(0,null);
+
+  /**
+   * Invoke the <code>rebuildIndex</code> action.
+   * @see jasper.service.BJasperService#rebuildIndex
+   */
+  public void rebuildIndex() { invoke(rebuildIndex,null,null); }
 
 ////////////////////////////////////////////////////////////////
 // Type
@@ -78,5 +99,11 @@ public final class BJasperService extends BAbstractService
 
   public void atSteadyState()
   {
+    doRebuildIndex();
+  }
+
+  public void doRebuildIndex()
+  {
+    System.out.println("----> JASPER_REBUILD_INDEX");
   }
 }
