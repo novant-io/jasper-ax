@@ -99,6 +99,7 @@ public final class BJasperServlet extends BWebServlet
       json.write('{');
       json.writeKey("id").writeVal(p.id).write(',');
       json.writeKey("name").writeVal(p.name).write(',');
+      json.writeKey("kind").writeVal(p.kind).write(',');
       json.writeKey("path").writeVal(p.path);
       if (p.unit != null)
       {

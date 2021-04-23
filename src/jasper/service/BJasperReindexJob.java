@@ -71,12 +71,13 @@ public final class BJasperReindexJob extends BSimpleJob
         String id   = c.getHandleOrd().toString();
         String name = c.getName();
         String path = c.getSlotPath().toString().substring(5);
+        String kind = c instanceof BBooleanPoint ? "bool" : "num";
         String unit = null;
 
         BFacets f = (BFacets)c.get("facets");
         if (f != null) unit = f.gets("units", null);
 
-        JasperPoint point = new JasperPoint(id, name, path, unit);
+        JasperPoint point = new JasperPoint(id, name, path, kind, unit);
         index.add(point);
       }
     }
