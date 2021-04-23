@@ -10,6 +10,7 @@ package jasper.servlet;
 
 import java.io.*;
 import javax.baja.io.*;
+import javax.baja.naming.*;
 import javax.baja.sys.*;
 import javax.baja.util.*;
 import javax.baja.web.*;
@@ -117,6 +118,7 @@ public final class BJasperServlet extends BWebServlet
   /** Service /v1/values request. */
   private void doValues(WebOp op) throws IOException
   {
+    BJasperService service = (BJasperService)this.getParent();
     String[] ids = index.ids();
 
     HttpServletResponse res = op.getResponse();
@@ -130,10 +132,13 @@ public final class BJasperServlet extends BWebServlet
     for (int i=0; i<ids.length; i++)
     {
       JasperPoint p = index.get(ids[i]);
+      BComponent c = (BComponent)BOrd.make(p.id).resolve(service).get();
+      Object val = JasperUtil.getPointJsonValue(c);
+
       if (i > 0) json.write(',');
       json.write('{');
       json.writeKey("id").writeVal(p.id).write(',');
-      json.writeKey("val").writeVal(5);
+      json.writeKey("val").writeVal(val);
       json.write('}');
     }
     json.write(']');

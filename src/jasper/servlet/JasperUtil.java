@@ -10,6 +10,7 @@ package jasper.servlet;
 
 import java.io.*;
 import javax.baja.io.*;
+import javax.baja.status.*;
 import javax.baja.sys.*;
 import javax.baja.util.*;
 import javax.baja.web.*;
@@ -20,6 +21,32 @@ import javax.servlet.http.*;
  */
 public final class JasperUtil
 {
+
+////////////////////////////////////////////////////////////////
+// BComponent
+////////////////////////////////////////////////////////////////
+
+  /**
+   * Get the JSON representation for the current value
+   * of given point, or 'null' if not available.
+   */
+  static Object getPointJsonValue(BComponent c)
+  {
+    Object out = c.get("out");
+
+    if (out instanceof BStatusValue)
+    {
+      // if status != ok return "NaN"
+      BStatusValue val = (BStatusValue)out;
+      if (!val.getStatus().isOk()) return "NaN";
+
+      // return as BStatusValue and let JsonWriter encode
+      return val;
+    }
+
+    // if we get here then assume no value
+    return null;
+  }
 
 ////////////////////////////////////////////////////////////////
 // Servlet

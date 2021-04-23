@@ -10,6 +10,7 @@ package jasper.servlet;
 
 import java.io.*;
 import java.util.*;
+import javax.baja.sys.*;
 
 /**
  * JsonWriter.
@@ -60,34 +61,65 @@ public final class JsonWriter
     return this;
   }
 
-  /** Write given char to output stream. */
-  JsonWriter writeVal(String val) throws IOException
-  {
-    // TODO: escape
-    out.print('\"');
-    out.print(val);
-    out.print('\"');
-    return this;
-  }
-
   /** Write given object to output stream. */
-  JsonWriter writeVal(HashMap val) throws IOException
+  JsonWriter writeVal(Object val) throws IOException
   {
-    out.print('{');
-    int i = 0;
-
-    Iterator iter = val.entrySet().iterator();
-    while (iter.hasNext())
+    // null
+    if (val == null)
     {
-      if (i > 0) out.print(',');
-      Map.Entry e = (Map.Entry)iter.next();
-      writeKey((String)e.getKey());
-      writeVal(e.getValue().toString());
-      i++;
+      out.print("null");
+      return this;
     }
 
-    out.print('}');
-    return this;
+    // String
+    if (val instanceof String)
+    {
+      // TODO: escape
+      out.print('\"');
+      out.print(val);
+      out.print('\"');
+      return this;
+    }
+
+    // BIBoolean
+    if (val instanceof BIBoolean)
+    {
+      BIBoolean b = (BIBoolean)val;
+      out.print(b.getBoolean());
+      return this;
+    }
+
+    // BINumeric
+    if (val instanceof BINumeric)
+    {
+      BINumeric n = (BINumeric)val;
+      out.print(n.getNumeric());
+      return this;
+    }
+
+    // HashMap
+    if (val instanceof HashMap)
+    {
+      HashMap map = (HashMap)val;
+      out.print('{');
+      int i = 0;
+
+      Iterator iter = map.entrySet().iterator();
+      while (iter.hasNext())
+      {
+        if (i > 0) out.print(',');
+        Map.Entry e = (Map.Entry)iter.next();
+        writeKey((String)e.getKey());
+        writeVal(e.getValue().toString());
+        i++;
+      }
+
+      out.print('}');
+      return this;
+    }
+
+    // unsupported type
+    throw new IOException("Unsupported type '" + val + "'");
   }
 
   private PrintWriter out;
