@@ -6,7 +6,7 @@ Niagara 4 support coming soon!
 
 ---
 
-** 🚧 UNDER HEAVY CONSTRUCTION 🚧 **
+**🚧 UNDER HEAVY CONSTRUCTION 🚧**
 
 ---
 
