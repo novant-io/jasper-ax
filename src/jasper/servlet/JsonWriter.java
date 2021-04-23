@@ -36,29 +36,54 @@ public final class JsonWriter
     return this;
   }
 
-  /** Write given object to output stream. */
-  JsonWriter write(Object val) throws IOException
+  /** Write given char to output stream. */
+  JsonWriter write(char val) throws IOException
   {
-    if (val instanceof HashMap) return writeHashMap((HashMap)val);
-
-    // unsupported
-    throw new IOException("Unsupported value type '" + val + "'");
+    out.print(val);
+    return this;
   }
 
-  private JsonWriter writeHashMap(HashMap map) throws IOException
+  /** Write given name as "<name>": to output stream. */
+  JsonWriter writeKey(String name) throws IOException
+  {
+    out.print('\"');
+    out.print(name);  // TODO: escape
+    out.print('\"');
+    out.print(':');
+    return this;
+  }
+
+  /** Write given int to output stream. */
+  JsonWriter writeVal(int val) throws IOException
+  {
+    out.print(val);
+    return this;
+  }
+
+  /** Write given char to output stream. */
+  JsonWriter writeVal(String val) throws IOException
+  {
+    // TODO: escape
+    out.print('\"');
+    out.print(val);
+    out.print('\"');
+    return this;
+  }
+
+  /** Write given object to output stream. */
+  JsonWriter writeVal(HashMap val) throws IOException
   {
     out.print('{');
+    int i = 0;
 
-    Iterator iter = map.entrySet().iterator();
+    Iterator iter = val.entrySet().iterator();
     while (iter.hasNext())
     {
+      if (i > 0) out.print(',');
       Map.Entry e = (Map.Entry)iter.next();
-      out.print('\"');
-      out.print(e.getKey());
-      out.print('\"');
-      out.print(':');
-      // TODO
-      out.print("\"" + e.getValue() + "\"");
+      writeKey((String)e.getKey());
+      writeVal(e.getValue().toString());
+      i++;
     }
 
     out.print('}');

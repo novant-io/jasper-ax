@@ -39,12 +39,20 @@ public final class JasperIndex
     map.put(p.id, p);
   }
 
+  /** Get current ids in index. */
+  public String[] ids()
+  {
+    // TODO: should we cache this?
+    Set keys = map.keySet();
+    String[] acc = (String[])keys.toArray(new String[keys.size()]);
+    return acc;
+  }
+
   /** Get the point for given id or null if not found. */
   public JasperPoint get(String id)
   {
     return (JasperPoint)map.get(id);
   }
 
-  // TODO
-  /*private*/ public HashMap map = new HashMap();
+  private HashMap map = new HashMap();
 }

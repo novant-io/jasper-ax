@@ -82,13 +82,34 @@ public final class BJasperServlet extends BWebServlet
   /** Service /v1/points request. */
   private void doPoints(WebOp op) throws IOException
   {
+    String[] ids = index.ids();
+
     HttpServletResponse res = op.getResponse();
     res.setStatus(200);
     res.setHeader("Content-Type", "application/json");
 
-    // TODO
     JsonWriter json = new JsonWriter(res.getOutputStream());
-    json.write(index.map).flush().close();
+    json.write('{');
+    json.writeKey("size").writeVal(ids.length).write(',');
+    json.writeKey("list").write('[');
+    for (int i=0; i<ids.length; i++)
+    {
+      JasperPoint p = index.get(ids[i]);
+      if (i > 0) json.write(',');
+      json.write('{');
+      json.writeKey("id").writeVal(p.id).write(',');
+      json.writeKey("name").writeVal(p.name).write(',');
+      json.writeKey("path").writeVal(p.path);
+      if (p.unit != null)
+      {
+        json.write(',');
+        json.writeKey("unit").writeVal(p.unit);
+      }
+      json.write('}');
+    }
+    json.write(']');
+    json.write('}');
+    json.flush().close();
   }
 
 ////////////////////////////////////////////////////////////////
