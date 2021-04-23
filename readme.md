@@ -10,6 +10,15 @@ Niagara 4 support coming soon!
 
 ---
 
+## Installation
+
+To setup Jasper on your JACE:
+
+ 1. Install the `jasper.jar` module onto your system
+ 2. Open the `jasper` palette
+ 3. Drag the `JasperService` into your `Services` component
+ 4. Let the index build and Done! 🏁
+
 ## Points
 
     $ curl host/jasper/v1/points -u username:password
