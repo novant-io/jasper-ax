@@ -109,6 +109,7 @@ public final class BJasperService extends BAbstractService
     BJasperReindexJob job = new BJasperReindexJob(index);
     try { job.run(null); }
     catch (Exception e) { e.printStackTrace(); }
+    getServlet().setIndex(index);
   }
 
 ////////////////////////////////////////////////////////////////

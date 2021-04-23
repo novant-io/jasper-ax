@@ -45,5 +45,6 @@ public final class JasperIndex
     return (JasperPoint)map.get(id);
   }
 
-  private HashMap map = new HashMap();
+  // TODO
+  /*private*/ public HashMap map = new HashMap();
 }

@@ -14,6 +14,7 @@ import javax.baja.sys.*;
 import javax.baja.util.*;
 import javax.baja.web.*;
 import javax.servlet.http.*;
+import jasper.service.*;
 
 /**
  * BJasperServlet
@@ -42,11 +43,15 @@ public final class BJasperServlet extends BWebServlet
 // Constructor
 ////////////////////////////////////////////////////////////////
 
+  /** Constructor. */
   public BJasperServlet()
   {
     super.setServletName("jasper");
     super.setFlags(getSlot("servletName"), Flags.READONLY | Flags.SUMMARY);
   }
+
+  /** Set backing index */
+  public void setIndex(JasperIndex index) { this.index = index; }
 
 ////////////////////////////////////////////////////////////////
 // Servlet
@@ -80,6 +85,15 @@ public final class BJasperServlet extends BWebServlet
     HttpServletResponse res = op.getResponse();
     res.setStatus(200);
     res.setHeader("Content-Type", "application/json");
-    op.getHtmlWriter().w("{\"msg\":\"Hello, World!\"}").flush();
+
+    // TODO
+    JsonWriter json = new JsonWriter(res.getOutputStream());
+    json.write(index.map).flush().close();
   }
+
+////////////////////////////////////////////////////////////////
+// Attributes
+////////////////////////////////////////////////////////////////
+
+  private JasperIndex index;
 }
