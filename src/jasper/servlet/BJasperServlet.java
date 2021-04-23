@@ -73,6 +73,7 @@ public final class BJasperServlet extends BWebServlet
     if (path[1].equals("v1"))
     {
       if (path[2].equals("points")) { doPoints(op); return; }
+      if (path[2].equals("values")) { doValues(op); return; }
     }
 
     // if we get here then 404
@@ -91,7 +92,7 @@ public final class BJasperServlet extends BWebServlet
     JsonWriter json = new JsonWriter(res.getOutputStream());
     json.write('{');
     json.writeKey("size").writeVal(ids.length).write(',');
-    json.writeKey("list").write('[');
+    json.writeKey("points").write('[');
     for (int i=0; i<ids.length; i++)
     {
       JasperPoint p = index.get(ids[i]);
@@ -106,6 +107,33 @@ public final class BJasperServlet extends BWebServlet
         json.write(',');
         json.writeKey("unit").writeVal(p.unit);
       }
+      json.write('}');
+    }
+    json.write(']');
+    json.write('}');
+    json.flush().close();
+  }
+
+  /** Service /v1/values request. */
+  private void doValues(WebOp op) throws IOException
+  {
+    String[] ids = index.ids();
+
+    HttpServletResponse res = op.getResponse();
+    res.setStatus(200);
+    res.setHeader("Content-Type", "application/json");
+
+    JsonWriter json = new JsonWriter(res.getOutputStream());
+    json.write('{');
+    json.writeKey("size").writeVal(ids.length).write(',');
+    json.writeKey("values").write('[');
+    for (int i=0; i<ids.length; i++)
+    {
+      JasperPoint p = index.get(ids[i]);
+      if (i > 0) json.write(',');
+      json.write('{');
+      json.writeKey("id").writeVal(p.id).write(',');
+      json.writeKey("val").writeVal(5);
       json.write('}');
     }
     json.write(']');

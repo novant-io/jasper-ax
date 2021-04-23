@@ -16,7 +16,7 @@ Niagara 4 support coming soon!
 
     {
       "size": 3,
-      "list": [
+      "points": [
         {
           "id":   "h:1b6b",
           "name": "SetpointTemp",
@@ -46,7 +46,7 @@ Niagara 4 support coming soon!
 
     {
       "size": 3,
-      "list": [
+      "values": [
         { "id":"h:1b6b", "val":72 },
         { "id":"h:1b75", "val":true },
         { "id":"h:1b6d", "val":25 }
