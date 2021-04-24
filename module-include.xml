@@ -9,8 +9,7 @@
 <types>
 
   <!-- jasper.service -->
-  <type name="JasperService"    class="jasper.service.BJasperService" />
-  <type name="JasperReindexJob" class="jasper.service.BJasperReindexJob" />
+  <type name="JasperService" class="jasper.service.BJasperService" />
 
   <!-- jasper.servlet -->
   <type name="JasperServlet" class="jasper.servlet.BJasperServlet" />

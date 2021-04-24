@@ -11,6 +11,7 @@ package jasper.service;
 
 import javax.baja.log.*;
 import javax.baja.sys.*;
+import javax.baja.control.*;
 import jasper.servlet.*;
 
 /**
@@ -106,10 +107,46 @@ public final class BJasperService extends BAbstractService
 
   public void doRebuildIndex()
   {
-    BJasperReindexJob job = new BJasperReindexJob(index);
-    try { job.run(null); }
+    try
+    {
+      // start
+      LOG.message("JasperReindexJob started");
+      BAbsTime t1 = BAbsTime.now();
+
+      // clear index
+      index.clear();
+
+      // scan station for points
+      BStation station = Sys.getStation();
+      BComponent[] comps = station.getComponentSpace().getAllComponents();
+      for (int i=0; i<comps.length; i++)
+      {
+        BComponent c = comps[i];
+        if (c instanceof BNumericPoint || c instanceof BBooleanPoint)
+        {
+          String id   = c.getHandleOrd().toString();
+          String name = c.getName();
+          String path = c.getSlotPath().toString().substring(5);
+          String kind = c instanceof BBooleanPoint ? "bool" : "num";
+          String unit = null;
+
+          BFacets f = (BFacets)c.get("facets");
+          if (f != null) unit = f.gets("units", null);
+
+          JasperPoint point = new JasperPoint(id, name, path, kind, unit);
+          index.add(point);
+        }
+      }
+
+      // TODO: this is design smell
+      getServlet().setIndex(index);
+
+      // complete
+      BAbsTime t2 = BAbsTime.now();
+      LOG.message("JasperReindexJob complete [" +
+        t1.delta(t2) + ", " + index.size() + " points]");
+    }
     catch (Exception e) { e.printStackTrace(); }
-    getServlet().setIndex(index);
   }
 
 ////////////////////////////////////////////////////////////////
