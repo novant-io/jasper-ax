@@ -24,5 +24,6 @@
   <!-- Packages -->
   <package name="jasper.service" />
   <package name="jasper.servlet" />
+  <package name="jasper.util" />
 
 </module>

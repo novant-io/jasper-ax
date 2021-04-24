@@ -16,6 +16,7 @@ import javax.baja.util.*;
 import javax.baja.web.*;
 import javax.servlet.http.*;
 import jasper.service.*;
+import jasper.util.*;
 
 /**
  * BJasperServlet

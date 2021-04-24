@@ -6,7 +6,7 @@
 //   23 Apr 2021  Andy Frank  Creation
 //
 
-package jasper.servlet;
+package jasper.util;
 
 import java.io.*;
 import javax.baja.io.*;
