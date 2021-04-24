@@ -12,7 +12,7 @@
     preferredSymbol = "jp"
     description     = "Jasper"
     vendor          = "Novant"
-    vendorVersion   = "0.2"
+    vendorVersion   = "0.3"
     edition         = "j2me"
 >
 
