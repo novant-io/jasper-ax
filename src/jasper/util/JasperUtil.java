@@ -10,6 +10,7 @@ package jasper.util;
 
 import java.io.*;
 import javax.baja.io.*;
+import javax.baja.control.*;
 import javax.baja.status.*;
 import javax.baja.sys.*;
 import javax.baja.util.*;
@@ -27,10 +28,29 @@ public final class JasperUtil
 ////////////////////////////////////////////////////////////////
 
   /**
+   * Get the Jasper point id for given point.
+   */
+  public static String getPointId(BComponent c)
+  {
+    // strip h: from handle ord
+    String handle = c.getHandleOrd().toString();
+    String suffix = handle.substring(2);
+
+    // point type
+    if (c instanceof BNumericWritable) return "av." + suffix;
+    if (c instanceof BNumericPoint)    return "ai." + suffix;
+    if (c instanceof BBooleanWritable) return "bv." + suffix;
+    if (c instanceof BBooleanPoint)    return "bi." + suffix;
+
+    // unsupported type
+    throw new RuntimeException("Unsupported point type '" + c.getName() + "'");
+  }
+
+  /**
    * Get the JSON representation for the current value
    * of given point, or 'null' if not available.
    */
-  static Object getPointJsonValue(BComponent c)
+  public static Object getPointJsonValue(BComponent c)
   {
     Object out = c.get("out");
 
@@ -53,13 +73,13 @@ public final class JasperUtil
 ////////////////////////////////////////////////////////////////
 
   /** Convenience for sendErr(404) */
-  static void sendNotFound(WebOp op) throws IOException
+  public static void sendNotFound(WebOp op) throws IOException
   {
     sendErr(op, 404, "Not Found");
   }
 
   /** Send an error repsponse as JSON with code and msg. */
-  static void sendErr(WebOp op, int code, String msg) throws IOException
+  public static void sendErr(WebOp op, int code, String msg) throws IOException
   {
     HttpServletResponse res = op.getResponse();
     res.setStatus(code);
@@ -68,7 +88,7 @@ public final class JasperUtil
   }
 
   /** Read content from request. */
-  static String readContent(WebOp op) throws IOException
+  public static String readContent(WebOp op) throws IOException
   {
     StringBuffer sb = new StringBuffer();
     InputStream in = new BufferedInputStream(op.getRequest().getInputStream());
@@ -86,7 +106,7 @@ public final class JasperUtil
 ////////////////////////////////////////////////////////////////
 
   /** Split a path string into array. */
-  static String[] splitPath(String path)
+  public static String[] splitPath(String path)
   {
     // TODO FIXIT: there _has_ to be a better way todo this????
     String[] orig = TextUtil.splitAndTrim(path, '/');

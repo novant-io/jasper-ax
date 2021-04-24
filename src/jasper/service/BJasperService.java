@@ -13,6 +13,7 @@ import javax.baja.log.*;
 import javax.baja.sys.*;
 import javax.baja.control.*;
 import jasper.servlet.*;
+import jasper.util.*;
 
 /**
  * JasperService.
@@ -124,16 +125,15 @@ public final class BJasperService extends BAbstractService
         BComponent c = comps[i];
         if (c instanceof BNumericPoint || c instanceof BBooleanPoint)
         {
-          String id   = c.getHandleOrd().toString();
+          String id   = JasperUtil.getPointId(c);
           String name = c.getName();
           String path = c.getSlotPath().toString().substring(5);
-          String kind = c instanceof BBooleanPoint ? "bool" : "num";
           String unit = null;
 
           BFacets f = (BFacets)c.get("facets");
           if (f != null) unit = f.gets("units", null);
 
-          JasperPoint point = new JasperPoint(id, name, path, kind, unit);
+          JasperPoint point = new JasperPoint(id, name, path, unit);
           index.add(point);
         }
       }

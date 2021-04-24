@@ -1,6 +1,8 @@
 # Japser AX
 
-An easy-to-use JSON API for getting data out of Niagara AX.
+[jasper]: https://github.com/novant-io/jasper
+
+An implemenation of the easy-to-use [Jasper][jasper] JSON API for Niagara AX.
 
 Niagara 4 support coming soon!
 
@@ -27,22 +29,19 @@ To setup Jasper on your JACE:
       "size": 3,
       "points": [
         {
-          "id":   "h:1b6b",
+          "id":   "av.1b6b",
           "name": "SetpointTemp",
-          "kind": "num",
           "path": "/PxHome/Graphics/Campus/Building/Floor1/VavZoneC/SetpointTemp",
           "unit": "°F"
         },
         {
-          "id":   "h:1b75",
+          "id":   "bv.1b75",
           "name": "Occupied",
-          "kind": "bool",
           "path": "/PxHome/Graphics/Campus/Building/Floor1/VavZoneC/Occupied"
         },
         {
-          "id":   "h:1b6d",
+          "id":   "av.1b6d",
           "name": "HeatingCoil",
-          "kind": "num",
           "path": "/PxHome/Graphics/Campus/Building/Floor1/VavZoneC/HeatingCoil",
           "unit": "%"
         }
