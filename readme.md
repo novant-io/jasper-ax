@@ -21,6 +21,18 @@ To setup Jasper on your JACE:
  3. Drag the `JasperService` into your `Services` component
  4. Let the index build and Done! 🏁
 
+## About
+
+    $ curl host/jasper/v1/about -u username:password
+
+    {
+      "vendor": "Tridium",
+      "model": "Niagara AX",
+      "version": "3.8.41",
+      "moduleName": "jasper",
+      "moduleVersion": "0.2"
+    }
+
 ## Points
 
     $ curl host/jasper/v1/points -u username:password
