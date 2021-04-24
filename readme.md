@@ -69,8 +69,8 @@ To setup Jasper on your JACE:
     {
       "size": 3,
       "values": [
-        { "id":"h:1b6b", "val":72 },
-        { "id":"h:1b75", "val":true },
-        { "id":"h:1b6d", "val":25 }
+        { "id":"av.1b6b", "val":72 },
+        { "id":"bv.1b75", "val":true },
+        { "id":"av.1b6d", "val":25 }
       ]
     }
