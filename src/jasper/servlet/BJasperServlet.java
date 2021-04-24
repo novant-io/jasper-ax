@@ -74,12 +74,36 @@ public final class BJasperServlet extends BWebServlet
     // key off version
     if (path[1].equals("v1"))
     {
+      if (path[2].equals("about"))  { doAbout(op);  return; }
       if (path[2].equals("points")) { doPoints(op); return; }
       if (path[2].equals("values")) { doValues(op); return; }
     }
 
     // if we get here then 404
     JasperUtil.sendNotFound(op);
+  }
+
+  /** Service /v1/about request. */
+  private void doAbout(WebOp op) throws IOException
+  {
+    HttpServletResponse res = op.getResponse();
+    res.setStatus(200);
+    res.setHeader("Content-Type", "application/json");
+
+    JsonWriter json = new JsonWriter(res.getOutputStream());
+    json.write('{');
+
+    BModule baja = BComponent.TYPE.getModule();
+    json.writeKey("vendor").writeVal("Tridium").write(',');
+    json.writeKey("model").writeVal("Niagara AX").write(',');
+    json.writeKey("version").writeVal(baja.getVendorVersion().toString());
+
+    BModule module = BJasperService.TYPE.getModule();
+    json.writeKey("moduleName").writeVal(module.getModuleName()).write(',');
+    json.writeKey("moduleVersion").writeVal(module.getVendorVersion().toString()).write(',');
+
+    json.write('}');
+    json.flush().close();
   }
 
   /** Service /v1/points request. */
@@ -132,7 +156,8 @@ public final class BJasperServlet extends BWebServlet
     for (int i=0; i<ids.length; i++)
     {
       JasperPoint p = index.get(ids[i]);
-      BComponent c = (BComponent)BOrd.make(p.id).resolve(service).get();
+      BOrd h = JasperUtil.getOrdFromId(p.id);
+      BComponent c = (BComponent)h.resolve(service).get();
       Object val = JasperUtil.getPointJsonValue(c);
 
       if (i > 0) json.write(',');

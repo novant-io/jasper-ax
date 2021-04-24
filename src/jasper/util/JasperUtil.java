@@ -11,6 +11,7 @@ package jasper.util;
 import java.io.*;
 import javax.baja.io.*;
 import javax.baja.control.*;
+import javax.baja.naming.*;
 import javax.baja.status.*;
 import javax.baja.sys.*;
 import javax.baja.util.*;
@@ -44,6 +45,15 @@ public final class JasperUtil
 
     // unsupported type
     throw new RuntimeException("Unsupported point type '" + c.getName() + "'");
+  }
+
+  /**
+   * Get handle Ord from component point id.
+   */
+  public static BOrd getOrdFromId(String id)
+  {
+    String handle = "h:" + id.substring(3);
+    return BOrd.make(handle);
   }
 
   /**

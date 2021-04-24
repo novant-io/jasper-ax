@@ -85,7 +85,7 @@ public final class JsonWriter
     if (val instanceof BIBoolean)
     {
       BIBoolean b = (BIBoolean)val;
-      out.print(b.getBoolean());
+      out.print(b.getBoolean() ? 1 : 0);
       return this;
     }
 
