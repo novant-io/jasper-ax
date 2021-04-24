@@ -14,9 +14,11 @@ Niagara 4 support coming soon!
 
 ## Installation
 
+[rel]: https://github.com/novant-io/jasper-ax/releases
+
 To setup Jasper on your JACE:
 
- 1. Install the `jasper.jar` module onto your system
+ 1. Install the [latest][rel] `jasper.jar` module onto your system
  2. Open the `jasper` palette
  3. Drag the `JasperService` into your `Services` component
  4. Let the index build and Done! 🏁
