@@ -1,8 +1,8 @@
 # Japser AX
 
-** NOTE: This project is currently not maintained and not up-to-date with the
-         current Jasper specification.  See [jasper-n4](https://github.com/novant-io/jasper-n4)
-         for Niagara 4 support.**
+**NOTE: This project is currently not maintained and not up-to-date with the
+        current Jasper specification.  See [jasper-n4](https://github.com/novant-io/jasper-n4)
+        for Niagara 4 support.**
 
 ---
 
