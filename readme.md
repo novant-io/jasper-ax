@@ -1,16 +1,14 @@
 # Japser AX
 
+** NOTE: This project is currently not maintained and not up-to-date with the
+         current Jasper specification.  See [jasper-n4](https://github.com/novant-io/jasper-n4)
+         for Niagara 4 support.**
+
+---
+
 [jasper]: https://github.com/novant-io/jasper
 
-An implemenation of the easy-to-use [Jasper][jasper] JSON API for Niagara AX.
-
-Niagara 4 support coming soon!
-
----
-
-**🚧 UNDER HEAVY CONSTRUCTION 🚧**
-
----
+An implementation of the easy-to-use [Jasper][jasper] JSON API for Niagara AX.
 
 ## Installation
 
